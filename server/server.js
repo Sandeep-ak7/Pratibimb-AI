@@ -20,7 +20,7 @@ await connectDB()
 // The API endpoints are prefixed with /api/users
 
 app.use('/api/user',userRouter)
-app.use('/api/image ',imageRouter)
+app.use('/api/image',imageRouter)
 app.get('/', (req, res) => res.send('API working !'))
 
 app.listen(PORT, () => console.log('Server is running on port '+ PORT ));

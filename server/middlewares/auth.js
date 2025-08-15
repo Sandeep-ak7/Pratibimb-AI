@@ -9,9 +9,9 @@ const userAuth = (req, res, next) => {
   try {
     const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
     // console.log("tokenDecode ---> ", tokenDecode);
-    
+
     if (tokenDecode.Id) {
-      req.user = { id : tokenDecode.Id};
+      req.user = { id: tokenDecode.Id };
     } else {
       return res.json({
         success: false,
