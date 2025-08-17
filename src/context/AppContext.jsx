@@ -16,6 +16,8 @@ const AppContextProvider = (props) => {
     const [credit, setCredit] = useState(false)
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+    // const navigate = useNavigate()
+
     const loadCreditData = async () => {
         try {
             const { data } = await axios.get(backendUrl + '/api/user/credits', { headers: { token } })
@@ -27,6 +29,25 @@ const AppContextProvider = (props) => {
         } catch (error) {
             console.log(error);
             toast.error(error.massage);
+        }
+    }
+
+    const generateImage = async (prompt) => {
+        try {
+            const { data } = await axios.post(backendUrl + '/api/image/generate-image', { prompt }, { headers: { token } })
+            if (data.success) {
+                loadCreditData();
+                return data.resultImage
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            toast.error(error.message);
+            loadCreditData();
+            if (data.creditBalance === 0){
+                navigate('/buy ')
+            }
+
         }
     }
 
@@ -44,7 +65,7 @@ const AppContextProvider = (props) => {
 
     const value = {
         user, setUser, showLogin, setShowLogin, backendUrl, token, setToken, credit, setCredit,
-        loadCreditData, logout
+        loadCreditData, logout , generateImage
     }
 
     return (

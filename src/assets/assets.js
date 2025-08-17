@@ -88,7 +88,7 @@ export const plans = [
   {
     id: "Free",
     price: 0,
-    credits: 10,
+    credits: 3,
     desc: "Best for testing the service.",
   },
   {
